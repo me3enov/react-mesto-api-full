@@ -1,10 +1,7 @@
 class Api {
   constructor(config) {
-    this._headers = {
-      authorization: config.authorization,
-      'Content-Type': 'application/json'
-    };
     this._url = config.url;
+    this._headers = config.headers;
     this._cardsUrl = config.cardsUrl;
     this._cardsLikesUrl = config.cardsLikesUrl;
     this._userAvatarUrl = config.userAvatarUrl;
@@ -12,11 +9,20 @@ class Api {
     this._errorText = config.errorText;
   }
 
+  //get header
+  getHeader() {
+    const token = localStorage.getItem('token');
+    return {
+        ...this._headers,
+        Authorization: `Bearer ${token}`,
+    }
+  }
+
   //get user info
   getUserInfo() {
     return fetch(`${this._url}${this._userInfoUrl}`, {
       method: 'GET',
-      headers: this._headers
+      headers: this.getHeader(),
     })
     .then(this._checkServerResponse)
   }
@@ -25,7 +31,7 @@ class Api {
   getCards() {
     return fetch(`${this._url}${this._cardsUrl}`, {
       method: 'GET',
-      headers: this._headers
+      headers: this.getHeader(),
     })
     .then(this._checkServerResponse)
   }
@@ -39,7 +45,7 @@ class Api {
   setUserInfo(userData) {
     return fetch(`${this._url}${this._userInfoUrl}`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: this.getHeader(),
       body: JSON.stringify({
         name: userData.name,
         about: userData.about
@@ -52,7 +58,7 @@ class Api {
   setUserAvatar(link) {
     return fetch(`${this._url}${this._userAvatarUrl}`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: this.getHeader(),
       body: JSON.stringify({
         avatar: link
       })
@@ -64,7 +70,7 @@ class Api {
   addNewCard(cardData) {
     return fetch(`${this._url}${this._cardsUrl}`, {
       method: 'POST',
-      headers: this._headers,
+      headers: this.getHeader(),
       body: JSON.stringify({
         name: cardData.name,
         link: cardData.link
@@ -77,7 +83,7 @@ class Api {
   removeCard(cardData) {
     return fetch(`${this._url}${this._cardsUrl}/${cardData._id}`, {
       method: 'DELETE',
-      headers: this._headers
+      headers: this.getHeader(),
     })
     .then(this._checkServerResponse)
   }
@@ -86,7 +92,7 @@ class Api {
   changeLikeCardStatus(cardId, isLiked) {
     return fetch(`${this._url}${this._cardsLikesUrl}${cardId}`, {
         method: isLiked ? 'PUT' : 'DELETE',
-        headers: this._headers
+        headers: this.getHeader(),
       })
       .then(this._checkServerResponse)
   }
@@ -101,8 +107,10 @@ class Api {
 }
 
 const api = new Api({
-  authorization: `Bearer ${localStorage.getItem("token")}`,
   url: 'https://api.mesto.me3enov.nomoredomains.club',
+  headers: {
+    'Content-Type': 'application/json'
+  },
   cardsUrl: '/cards',
   cardsLikesUrl: '/cards/likes/',
   userAvatarUrl: '/users/me/avatar',

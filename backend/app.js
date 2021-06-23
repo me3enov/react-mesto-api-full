@@ -19,6 +19,8 @@ const { PORT = 3000 } = process.env;
 
 const app = express();
 
+app.use(helmet());
+
 app.use(cookieParser());
 
 const limiter = rateLimit({
@@ -26,8 +28,6 @@ const limiter = rateLimit({
   max: 100,
   message: 'Limiting to 100 requests per windowMs',
 });
-
-app.use(helmet());
 
 app.use(limiter);
 app.use(bodyParser.json());
