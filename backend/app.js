@@ -34,7 +34,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(requestLogger);
 
-mongoose.connect('mongodb://217.28.229.150/mesto', {
+mongoose.connect('mongodb://127.0.0.1:27017/mesto', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
