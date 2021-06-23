@@ -1,0 +1,26 @@
+.header__block-sign {
+  display: none;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+}
+
+@media screen and (max-width: 709px) {
+  .header__block-sign {
+    flex-direction: column;
+    padding: 40px 0;
+    border-bottom: 1px solid rgba(84, 84, 84, .7);
+  }
+}
+
+@media screen and (min-width: 710px) {
+  .header__block-sign {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-self: flex-end;
+    padding: 0;
+    opacity: 1;
+    visibility: visible;
+  }
+}

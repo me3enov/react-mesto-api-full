@@ -1,0 +1,17 @@
+.card__title {
+  width: 100%;
+  font-style: normal;
+  line-height: 29px;
+  font-size: 24px;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 0 0 0 21px;
+  margin: 0;
+  color: #000;
+  grid-row: 2/3;
+  grid-column: 1/2;
+  justify-self: start;
+  align-self: center;
+}

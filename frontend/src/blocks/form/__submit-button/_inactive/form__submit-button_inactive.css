@@ -1,0 +1,29 @@
+.form__submit-button_inactive {
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 2px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  background-color:rgba(0, 0, 0, 0);
+  color: #000000;
+  opacity: .2;
+  cursor: default;
+}
+
+.form__submit-button_inactive:hover {
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 2px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  background-color:rgba(0, 0, 0, 0);
+  color: #000000;
+  opacity: .2;
+  cursor: default;
+}

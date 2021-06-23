@@ -1,0 +1,6 @@
+@media screen and (max-width: 709px) {
+  .form__title_place_add {
+    line-height: 22px;
+    margin: 30px 20px 32px;
+  }
+}

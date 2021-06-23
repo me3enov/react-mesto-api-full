@@ -1,0 +1,17 @@
+.profile {
+  display: grid;
+}
+
+@media screen and (max-width: 709px) {
+  .profile {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, minmax(min-content, max-content));
+  }
+}
+
+@media screen and (min-width: 710px) {
+  .profile {
+    grid-template-columns: minmax(min-content, max-content) auto minmax(min-content, max-content);
+    grid-template-rows: 100px 110px;
+  }
+}

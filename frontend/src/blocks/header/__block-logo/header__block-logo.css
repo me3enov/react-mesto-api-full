@@ -1,0 +1,14 @@
+@media screen and (max-width: 709px) {
+  .header__block-logo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 28px;
+  }
+}
+
+@media screen and (min-width: 710px) {
+  .header__block-logo {
+    display: flex;
+    padding-top: 45px;
+  }
+}

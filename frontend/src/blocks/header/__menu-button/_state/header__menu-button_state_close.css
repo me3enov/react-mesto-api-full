@@ -1,0 +1,6 @@
+.header__menu-button_state_close {
+  width: 30px;
+  height: 30px;
+  transform: rotate(45deg);
+  background-image: url(../../../../images/plus.svg);
+}

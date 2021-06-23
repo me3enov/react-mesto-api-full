@@ -1,0 +1,13 @@
+.sign__auth-box{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+}
+.sign__auth-box:last-of-type{
+  align-self: flex-end;
+}

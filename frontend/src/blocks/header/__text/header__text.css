@@ -1,0 +1,21 @@
+.header__text {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: right;
+  color: #fff;
+  margin: 0 24px;
+}
+
+@media screen and (max-width: 709px) {
+  .header__text {
+    padding-bottom: 18px;
+  }
+}
+
+@media screen and (min-width: 710px) {
+  .header__text {
+    padding: 0;
+  }
+}

@@ -1,0 +1,5 @@
+.form__submit-button_loading-white-icon {
+  background-image: url(../../../../images/loader-white.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}

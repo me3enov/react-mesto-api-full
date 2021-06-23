@@ -1,0 +1,11 @@
+.form_type_sign {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+
+@media screen and (max-width: 709px) {
+  .form_type_sign {
+    padding: 0 30px;
+  }
+}

@@ -1,0 +1,8 @@
+.header__text-link_type_exit {
+  color: #a9a;
+  transition: .4s;
+}
+
+.header__text-link_type_exit:hover {
+  color:rgba(170, 153, 170, 0.85);
+}

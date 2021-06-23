@@ -1,0 +1,5 @@
+@media screen and (max-width: 709px) {
+  .form__input-container_place_add {
+    margin: 0 20px 0;
+  }
+}

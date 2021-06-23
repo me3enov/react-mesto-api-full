@@ -1,0 +1,21 @@
+.form__submit-button_place_sign {
+  height: 46px;
+  background-color: #fff;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration:none;
+  text-align: center;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+  transition: .4s;
+  margin: 0 0 15px;
+  padding: 0;
+}
+
+.form__submit-button_place_sign:hover {
+  background-color:rgba(255, 255, 255, 0.85);
+}

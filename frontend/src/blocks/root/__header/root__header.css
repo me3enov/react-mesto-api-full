@@ -1,0 +1,11 @@
+@media screen and (max-width: 425px) {
+  .root__header {
+    padding-bottom: 41px;
+  }
+}
+
+@media screen and (min-width: 426px) {
+  .root__header {
+    padding-bottom: 32px;
+  }
+}

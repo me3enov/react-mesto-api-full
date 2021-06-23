@@ -1,0 +1,17 @@
+.form__input_place_sign {
+  height: 27px;
+  border-bottom: 2px solid #ccc;
+  background-color: transparent;
+  color: #ccc;
+  margin: 0 0 30px;
+  padding: 0;
+}
+
+.form__input:focus {
+  outline: none;
+}
+
+.form__input_place_sign::placeholder {
+  font-weight: 500;
+  color: #fff;
+}

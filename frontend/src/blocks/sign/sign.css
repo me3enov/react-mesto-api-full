@@ -1,0 +1,12 @@
+.sign {
+  display: flex;
+  justify-self: center;
+  flex-direction: column;
+  width: 358px;
+}
+
+@media screen and (max-width: 709px) {
+  .sign {
+    width: 100%;
+  }
+}

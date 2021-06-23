@@ -1,0 +1,40 @@
+{
+  "name": "express-mesto",
+  "version": "1.0.0",
+  "description": "express-mesto",
+  "main": "index.js",
+  "scripts": {
+    "lint": "npx eslint *.js routes/*.js controllers/*.js models/*.js errors/*.js middlewares/*.js",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/me3enov/express-mesto.git"
+  },
+  "keywords": [],
+  "author": "Artem Mezenov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/me3enov/express-mesto/issues"
+  },
+  "homepage": "https://github.com/me3enov/express-mesto#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "celebrate": "^14.0.0",
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.2.6",
+    "joi": "^17.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.12",
+    "validator": "^13.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "nodemon": "^2.0.7"
+  }
+}
