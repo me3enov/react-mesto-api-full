@@ -41,7 +41,6 @@ mongoose.connect('mongodb://127.0.0.1:27017/mesto', {
   useUnifiedTopology: true,
 });
 
-app.use(cors(corsOption));
 
 app.get('/crash-test', () => {
   setTimeout(() => {
