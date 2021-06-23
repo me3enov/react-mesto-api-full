@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const path = require('path');
@@ -11,6 +12,7 @@ const { errors } = require('celebrate');
 const { login, createUser } = require('./controllers/users');
 const router = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { corsOption } = require('./middlewares/corsOption');
 const NotFoundError = require('./errors/NotFoundError.js');
 
 const { PORT = 3000 } = process.env;
@@ -25,6 +27,8 @@ const limiter = rateLimit({
   message: 'Limiting to 100 requests per windowMs',
 });
 
+app.use(helmet());
+
 app.use(limiter);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -37,10 +41,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useUnifiedTopology: true,
 });
 
-app.use('*', cors({
-  origin: 'https://mesto.me3enov.nomoredomains.club',
-  credentials: true,
-}));
+app.use(cors(corsOption));
 
 app.get('/crash-test', () => {
   setTimeout(() => {
