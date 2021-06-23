@@ -38,7 +38,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 });
 
 app.use('*', cors({
-  origin: 'https://mesto.vip',
+  origin: 'https://mesto.me3enov.nomoredomains.club',
   credentials: true,
 }));
 
