@@ -2,4 +2,4 @@
 Публичный IPv4:
 217.28.229.150
 Доменное имя:
-mesto.vip
+https://mesto.me3enov.nomoredomains.club/signin
