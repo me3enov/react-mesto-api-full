@@ -11,9 +11,9 @@ const {
 
 card.get('/cards', auth, getCards);
 
-card.post('/', validateCard, auth, createCard);
+card.post('/cards', validateCard, auth, createCard);
 
-card.delete('/cards//:cardId', validateId, auth, deleteCard);
+card.delete('/cards/:cardId', validateId, auth, deleteCard);
 
 card.put('/cards/:cardId/likes', validateId, auth, likeCard);
 
