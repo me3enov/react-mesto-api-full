@@ -14,14 +14,14 @@ const {
   updateAvatar,
 } = require('../controllers/users');
 
-users.get('/users', auth, getUsers);
+users.get('/users', getUsers);
 
-users.get('/users/:userId', validateId, auth, getCurrentUser);
+users.get('/users/:userId', validateId, getCurrentUser);
 
-users.get('/users/me', auth, aboutUser);
+users.get('/users/me', aboutUser);
 
-users.patch('/users/me', validateUserUpdate, auth, updateUser);
+users.patch('/users/me', validateUserUpdate, updateUser);
 
-users.patch('/users/me/avatar', validateAvatar, auth, updateAvatar);
+users.patch('/users/me/avatar', validateAvatar, updateAvatar);
 
 module.exports = users;
