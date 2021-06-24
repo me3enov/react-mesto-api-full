@@ -2,6 +2,8 @@ const CORS_WHITELIST = [
   'http://localhost:3000',
   'https://mesto.me3enov.nomoredomains.club',
   'http://mesto.me3enov.nomoredomains.club',
+  'https://api.mesto.me3enov.nomoredomains.club',
+  'http://api.mesto.me3enov.nomoredomains.club',
 ];
 
 const corsOption = {
