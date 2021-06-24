@@ -24,11 +24,11 @@ const validateId = celebrate({
 
 const validateUser = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().required().min(2).max(30)
+    name: Joi.string().min(2).max(30)
       .default(defaultValues.NAME),
-    about: Joi.string().required().min(2).max(20)
+    about: Joi.string().min(2).max(20)
       .default(defaultValues.ABOUT),
-    avatar: Joi.string().custom(urlValidation).required()
+    avatar: Joi.string().custom(urlValidation)
       .default(defaultValues.AVATAR),
     email: Joi.string().required().email(),
     password: Joi.string().required().min(8),
