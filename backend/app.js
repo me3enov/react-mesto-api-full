@@ -3,15 +3,14 @@ const express = require('express');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
-const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const rateLimit = require('express-rate-limit');
-const { celebrate, Joi } = require('celebrate');
 const { errors } = require('celebrate');
 const { login, createUser } = require('./controllers/users');
 const router = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { validateUser, validateLogin } = require('./middlewares/requestValidation');
 const { corsOption } = require('./middlewares/corsOption');
 const NotFoundError = require('./errors/NotFoundError.js');
 
@@ -49,26 +48,15 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(router);
 
-app.post('/signin', login);
-app.post(
-  '/signup',
-  celebrate({
-    body: Joi.object().keys({
-      email: Joi.string().required(),
-      password: Joi.string().required(),
-    }).unknown(true),
-  }),
-  createUser,
-);
+app.post('/signin', validateLogin, login);
+app.post('/signup', validateUser, createUser);
 
 app.use(errorLogger);
 app.use(errors());
 
-app.get('*', () => {
+app.use('*', () => {
   throw new NotFoundError({ message: 'Page not found!' });
 });
 

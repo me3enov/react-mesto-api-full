@@ -20,7 +20,7 @@ module.exports.createCard = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new BadRequestError('Validation Error!'));
+        next(new BadRequestError({ message: `Incorrect card data: ${err.message}` }));
       } else {
         next(err);
       }
@@ -31,27 +31,27 @@ module.exports.deleteCard = (req, res, next) => {
   const id = req.params.cardId;
   const userId = req.user._id;
   Card.findById(id)
-    .orFail(new NotFoundError('Card not found!'))
+    .orFail(new NotFoundError({ message: 'Card not found!' }))
     .then((card) => {
       if (card.owner.toString() === userId) {
         return Card.findByIdAndRemove(id)
-          .orFail(new NotFoundError('Card not found!'))
+          .orFail(new NotFoundError({ message: 'Card not found!' }))
           .then((data) => {
             res.status(200).send({ data });
           })
           .catch((err) => {
             if (err.name === 'CastError') {
-              next(new BadRequestError('Card not found!'));
+              next(new BadRequestError({ message: 'Card not found!' }));
             } else {
               next(err);
             }
           });
       }
-      return next(new ForbiddenError('Access is denied!'));
+      return next(new ForbiddenError({ message: 'Access is denied!' }));
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        next(new NotFoundError('Card not found!'));
+        next(new BadRequestError({ message: 'Card not found!' }));
       } else {
         next(err);
       }
@@ -64,13 +64,13 @@ module.exports.likeCard = (req, res, next) => {
     { $addToSet: { likes: req.user._id } },
     { new: true },
   )
-    .orFail(new NotFoundError('Card not found!'))
+    .orFail(new NotFoundError({ message: 'Card not found!' }))
     .then((card) => {
       res.status(200).send({ data: card });
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        next(new BadRequestError('Card not found!'));
+        next(new BadRequestError({ message: 'Card not found!' }));
       } else {
         next(err);
       }
@@ -81,13 +81,13 @@ module.exports.dislikeCard = (req, res, next) => {
   Card.findByIdAndUpdate(req.params._id,
     { $pull: { likes: req.user._id } },
     { new: true })
-    .orFail(new NotFoundError('Card not found!'))
+    .orFail(new NotFoundError({ message: 'Card not found!' }))
     .then((card) => {
       res.status(200).send({ data: card });
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        next(new BadRequestError('Card not found!'));
+        next(new BadRequestError({ message: 'Card not found!' }));
       } else {
         next(err);
       }

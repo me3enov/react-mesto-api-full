@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-// eslint-disable-next-line no-useless-escape
-const regex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
+const validator = require('validator');
 
 const cardSchema = new mongoose.Schema({
   name: {
@@ -14,9 +13,13 @@ const cardSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(link) {
-        return regex.test(link);
+        return validator.isURL(link,
+          {
+            protocols: ['http','https','ftp'],
+            require_protocol: true,
+          });
       },
-      message: (props) => `${props.value} Invalid URL`,
+      message: 'Invalid URL',
     },
   },
   owner: {

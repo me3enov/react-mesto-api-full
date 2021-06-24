@@ -18,11 +18,11 @@ module.exports.getUsers = (req, res, next) => {
 module.exports.getCurrentUser = (req, res, next) => {
   const id = req.params.userId;
   User.findById(id)
-    .orFail(new NotFoundError('User not found!'))
+    .orFail(new NotFoundError({ message: 'User not found!' }))
     .then((user) => res.status(200).send({ user }))
     .catch((err) => {
       if (err.name === 'CastError') {
-        next(new BadRequestError('Wrong ID'));
+        next(new BadRequestError({ message: 'Wrong ID!' }));
       } else {
         next(err);
       }
@@ -87,7 +87,7 @@ module.exports.updateUser = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new BadRequestError('Validation Error!'));
+        next(new BadRequestError({ message: 'Validation Error!' }));
       } else {
         next(err);
       }
@@ -110,7 +110,7 @@ module.exports.updateAvatar = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new BadRequestError('Validation Error!'));
+        next(new BadRequestError({ message: 'Validation Error!' }));
       } else {
         next(err);
       }
@@ -119,9 +119,6 @@ module.exports.updateAvatar = (req, res, next) => {
 
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
-  if (!email || !password) {
-    throw new BadRequestError('Email or password cannot be empty');
-  }
   User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign(
