@@ -1,5 +1,4 @@
 const users = require('express').Router();
-const auth = require('../middlewares/auth');
 const {
   validateId,
   validateUserUpdate,
