@@ -12,7 +12,9 @@ module.exports.getCards = (req, res, next) => {
 
 module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
-  Card.create({ name, link, owner: req.user._id })
+  const owner = req.user._id;
+
+  Card.create({ name, link, owner })
     .then((card) => {
       res
         .status(200)
@@ -29,11 +31,12 @@ module.exports.createCard = (req, res, next) => {
 
 module.exports.deleteCard = (req, res, next) => {
   const id = req.params.cardId;
-  const userId = req.user._id;
+  const owner = req.user._id;
+
   Card.findById(id)
     .orFail(new NotFoundError({ message: 'Card not found!' }))
     .then((card) => {
-      if (card.owner.toString() === userId) {
+      if (card.owner.toString() === owner) {
         return Card.findByIdAndRemove(id)
           .orFail(new NotFoundError({ message: 'Card not found!' }))
           .then((data) => {
@@ -59,9 +62,12 @@ module.exports.deleteCard = (req, res, next) => {
 };
 
 module.exports.likeCard = (req, res, next) => {
+  const id = req.params.cardId;
+  const owner = req.user._id;
+
   Card.findByIdAndUpdate(
-    req.params.cardId,
-    { $addToSet: { likes: req.user._id } },
+    id,
+    { $addToSet: { likes: owner } },
     { new: true },
   )
     .orFail(new NotFoundError({ message: 'Card not found!' }))
@@ -78,8 +84,12 @@ module.exports.likeCard = (req, res, next) => {
 };
 
 module.exports.dislikeCard = (req, res, next) => {
-  Card.findByIdAndUpdate(req.params._id,
-    { $pull: { likes: req.user._id } },
+  const id = req.params.cardId;
+  const owner = req.user._id;
+
+  Card.findByIdAndUpdate(
+    id,
+    { $pull: { likes: owner } },
     { new: true })
     .orFail(new NotFoundError({ message: 'Card not found!' }))
     .then((card) => {
