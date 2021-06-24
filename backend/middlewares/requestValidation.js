@@ -1,6 +1,6 @@
 const { celebrate, Joi, CelebrateError } = require('celebrate');
 const validator = require('validator');
-const { defaultValues } = require('../utils/constants');
+const { defaultUser } = require('../utils/constants');
 
 const urlValidation = (value) => {
   if (!validator.isURL(value)) {
@@ -25,11 +25,11 @@ const validateId = celebrate({
 const validateUser = celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30)
-      .default(defaultValues.NAME),
+      .default(defaultUser.name),
     about: Joi.string().min(2).max(20)
-      .default(defaultValues.ABOUT),
+      .default(defaultUser.about),
     avatar: Joi.string().custom(urlValidation)
-      .default(defaultValues.AVATAR),
+      .default(defaultUser.avatar),
     email: Joi.string().required().email(),
     password: Joi.string().required().min(8),
   }),
@@ -38,16 +38,16 @@ const validateUser = celebrate({
 const validateUserUpdate = celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30)
-      .default(defaultValues.NAME),
+      .default(defaultUser.name),
     about: Joi.string().required().min(2).max(20)
-      .default(defaultValues.ABOUT),
+      .default(defaultUser.about),
   }),
 });
 
 const validateAvatar = celebrate({
   body: Joi.object().keys({
     avatar: Joi.string().custom(urlValidation).required()
-      .default(defaultValues.AVATAR),
+      .default(defaultUser.avatar),
   }),
 });
 
