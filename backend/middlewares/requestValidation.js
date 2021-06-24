@@ -35,7 +35,7 @@ const validateUserUpdate = celebrate({
       .default(defaultValues.NAME),
     about: Joi.string().required().min(2).max(20)
       .default(defaultValues.ABOUT),
-  }),
+  }).unknown(true),
 });
 
 const validateAvatar = celebrate({
