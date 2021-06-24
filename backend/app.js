@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const rateLimit = require('express-rate-limit');
-const { celebrate, Joi } = require('celebrate');
 const { errors } = require('celebrate');
 const { login, createUser } = require('./controllers/users');
 const router = require('./routes/index');
@@ -49,15 +48,7 @@ app.get('/crash-test', () => {
 app.use(router);
 
 app.post('/signin', validateLogin, login);
-app.post(
-  '/signup',
-  celebrate({
-    body: Joi.object().keys({
-      email: Joi.string().required(),
-      password: Joi.string().required(),
-    }).unknown(true),
-  }),
-  createUser);
+app.post('/signup', validateUser, createUser);
 
 app.use(errorLogger);
 app.use(errors());
