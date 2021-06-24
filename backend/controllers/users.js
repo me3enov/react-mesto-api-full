@@ -76,11 +76,11 @@ module.exports.createUser = (req, res, next) => {
 };
 
 module.exports.updateUser = (req, res, next) => {
-  const owner = req.user._id;
+  const id = req.user._id;
   const { name, about } = req.body;
 
   User.findByIdAndUpdate(
-    owner,
+    id,
     { name, about },
     {
       new: true,
@@ -100,11 +100,11 @@ module.exports.updateUser = (req, res, next) => {
 };
 
 module.exports.updateAvatar = (req, res, next) => {
-  const owner = req.user._id;
+  const id = req.user._id;
   const { avatar } = req.body;
 
   User.findByIdAndUpdate(
-    owner,
+    id,
     { avatar },
     {
       new: true,
@@ -139,7 +139,7 @@ module.exports.login = (req, res, next) => {
           sameSite: true,
         })
         .status(200)
-        .send({ message: 'Successful' });
+        .send({ token: token, user: user });
     })
     .catch(next);
 };
