@@ -11,7 +11,7 @@ router.post('/signup', validateUser, createUser);
 
 router.get('/signout', logout);
 
-router.use('/cards', auth, cardsRouter);
-router.use('/users', auth, userRouter);
+router.use('/', auth, cardsRouter);
+router.use('/', auth, userRouter);
 
 module.exports = router;
