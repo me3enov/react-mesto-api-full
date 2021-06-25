@@ -58,11 +58,28 @@ function App() {
   };
 
   useEffect(() => {
-    api.getCards()
-      .then(res => {
-        setCards(res);
-      })
-      .catch((err) => console.log(err));
+    if(loggedIn) {
+      api.getUserInfo()
+        .then(res => {
+          setCurrentUser(res)
+        })
+        .catch(err => console.log(err));
+    }
+  }, [loggedIn]);
+
+  useEffect(() => {
+    if(loggedIn) {
+      api.getCards()
+        .then(res => {
+          setCards(res);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [loggedIn]);
+
+  useEffect(() => {
+    checkToken();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function handleAddPlace(card) {
@@ -95,14 +112,6 @@ function App() {
       .catch(err => console.log(err))
       .finally(() => setLoading(false));
   }
-
-  useEffect(() => {
-    api.getUserInfo()
-      .then(res => {
-        setCurrentUser(res)
-      })
-      .catch(err => console.log(err));
-  }, [])
 
   function handleUpdateUser(user) {
     setLoading(true);
@@ -173,11 +182,6 @@ function App() {
       document.removeEventListener('keydown', handleEscClose);
     };
   }, [])
-
-  useEffect(() => {
-    checkToken();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

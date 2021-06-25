@@ -1,9 +1,6 @@
 class Api {
   constructor(config) {
-    this._headers = {
-      authorization: config.authorization,
-      'Content-Type': 'application/json'
-    };
+    this._headers = config.headers;
     this._url = config.url;
     this._cardsUrl = config.cardsUrl;
     this._cardsLikesUrl = config.cardsLikesUrl;
@@ -101,8 +98,11 @@ class Api {
 }
 
 const api = new Api({
-  authorization: '08402336-c176-4b17-bc07-4e156c9de6bc',
-  url: 'https://mesto.nomoreparties.co/v1/cohort-21',
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+  },
+  url: 'https://api.mesto.me3enov.nomoredomains.club',
   cardsUrl: '/cards',
   cardsLikesUrl: '/cards/likes/',
   userAvatarUrl: '/users/me/avatar',
