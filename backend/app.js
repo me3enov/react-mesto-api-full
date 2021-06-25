@@ -7,12 +7,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const rateLimit = require('express-rate-limit');
 const { errors } = require('celebrate');
-const users = require('./routes/users.js');
-const cards = require('./routes/cards.js');
-const auth = require('./middlewares/auth');
-const { login, createUser } = require('./controllers/users');
+const routes = require('./routes');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const { validateUser, validateLogin } = require('./middlewares/requestValidation');
 const { corsOption } = require('./middlewares/corsOption');
 const NotFoundError = require('./errors/NotFoundError.js');
 //Здравствуйте, Рамиль!
@@ -55,11 +51,7 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.post('/signin', validateLogin, login);
-app.post('/signup', validateUser, createUser);
-
-app.use('/', auth, users);
-app.use('/', auth, cards);
+app.use(routes);
 
 app.use(errorLogger);
 app.use(errors());
