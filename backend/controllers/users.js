@@ -16,7 +16,7 @@ module.exports.getUsers = (req, res, next) => {
 };
 
 module.exports.getCurrentUser = (req, res, next) => {
-  const id = req.user._id;
+  const id = req.params._id;
 
   User.findById(id)
     .orFail(new NotFoundError({ message: 'User not found!' }))
@@ -125,6 +125,7 @@ module.exports.updateAvatar = (req, res, next) => {
 
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
+
   User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign(

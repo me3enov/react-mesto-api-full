@@ -30,7 +30,7 @@ module.exports.createCard = (req, res, next) => {
 };
 
 module.exports.deleteCard = (req, res, next) => {
-  const id = req.params.cardId;
+  const id = req.params._id;
   const owner = req.user._id;
 
   Card.findById(id)
@@ -62,7 +62,7 @@ module.exports.deleteCard = (req, res, next) => {
 };
 
 module.exports.likeCard = (req, res, next) => {
-  const id = req.params.cardId;
+  const id = req.params._id;
   const owner = req.user._id;
 
   Card.findByIdAndUpdate(
@@ -84,7 +84,7 @@ module.exports.likeCard = (req, res, next) => {
 };
 
 module.exports.dislikeCard = (req, res, next) => {
-  const id = req.params.cardId;
+  const id = req.params._id;
   const owner = req.user._id;
 
   Card.findByIdAndUpdate(
