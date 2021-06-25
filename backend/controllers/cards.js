@@ -90,7 +90,8 @@ module.exports.dislikeCard = (req, res, next) => {
   Card.findByIdAndUpdate(
     id,
     { $pull: { likes: owner } },
-    { new: true })
+    { new: true },
+  )
     .orFail(new NotFoundError({ message: 'Card not found!' }))
     .then((card) => {
       res.status(200).send({ data: card });

@@ -16,7 +16,7 @@ const {
 
 users.get('/users', auth, getUsers);
 
-users.get('/users/:userId', validateId, auth, getCurrentUser);
+users.get('/users/:_id', validateId, auth, getCurrentUser);
 
 users.get('/users/me', auth, aboutUser);
 

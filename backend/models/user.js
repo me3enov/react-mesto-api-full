@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
       validator(link) {
         return validator.isURL(link,
           {
-            protocols: ['http','https','ftp'],
+            protocols: ['http', 'https', 'ftp'],
             require_protocol: true,
           });
       },

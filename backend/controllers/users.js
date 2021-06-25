@@ -139,7 +139,7 @@ module.exports.login = (req, res, next) => {
           sameSite: true,
         })
         .status(200)
-        .send({ token: token, user: user });
+        .send({ message: 'Successful authorization!' });
     })
     .catch(next);
 };

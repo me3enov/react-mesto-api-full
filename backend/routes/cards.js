@@ -13,10 +13,10 @@ card.get('/cards', auth, getCards);
 
 card.post('/cards', validateCard, auth, createCard);
 
-card.delete('/cards/:cardId', validateId, auth, deleteCard);
+card.delete('/cards/:_id', validateId, auth, deleteCard);
 
-card.put('/cards/:cardId/likes', validateId, auth, likeCard);
+card.put('/cards/:_id/likes', validateId, auth, likeCard);
 
-card.delete('/cards/:cardId/likes', validateId, auth, dislikeCard);
+card.delete('/cards/:_id/likes', validateId, auth, dislikeCard);
 
 module.exports = card;
