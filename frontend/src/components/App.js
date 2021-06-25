@@ -147,6 +147,7 @@ function App() {
   }
 
   useEffect(() => {
+    console.log(loggedIn)
     if(loggedIn) {
       api.getUserInfo()
         .then(res => {
