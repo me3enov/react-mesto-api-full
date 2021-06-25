@@ -11,11 +11,6 @@ const routes = require('./routes');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { corsOption } = require('./middlewares/corsOption');
 const NotFoundError = require('./errors/NotFoundError.js');
-//Здравствуйте, Рамиль!
-//Хотел бы сказать вас большое спасибо за ваше подробное ревью!
-//Честно говоря очень тяжело даеться бэк, но благодаря вам многое удалось исправить за прошлые итерации.
-//Однако по-прежнему не могу разобраться с проблемой авторизации - что-то не так.
-//После входа не загружается контент и не могу произвести никаких запросов, всегдда получаю ошибку "Authorization required" из auth.js
 
 const { PORT = 3000 } = process.env;
 
