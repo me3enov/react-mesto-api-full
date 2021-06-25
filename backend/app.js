@@ -7,9 +7,6 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const rateLimit = require('express-rate-limit');
 const { errors } = require('celebrate');
-const users = require('./routes/users.js');
-const cards = require('./routes/cards.js');
-const auth = require('./middlewares/auth');
 const { login, createUser } = require('./controllers/users');
 const router = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -51,11 +48,10 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
+app.use(router);
+
 app.post('/signin', validateLogin, login);
 app.post('/signup', validateUser, createUser);
-
-app.use('/', auth, users);
-app.use('/', auth, cards);
 
 app.use(errorLogger);
 app.use(errors());
