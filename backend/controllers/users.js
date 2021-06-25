@@ -133,27 +133,7 @@ module.exports.login = (req, res, next) => {
         NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key',
         { expiresIn: '7d' },
       );
-      res
-        .cookie('jwt', token, {
-          maxAge: 3600000 * 24 * 7,
-          httpOnly: true,
-          sameSite: true,
-        })
-        .status(200)
-        .send({ message: 'Successful authorization!' });
+      res.status(200).send({ token });
     })
     .catch(next);
-};
-
-module.exports.logout = (_req, res, next) => {
-  try {
-    res.cookie('jwt', '', {
-      maxAge: -1,
-      httpOnly: true,
-      sameSite: true,
-    })
-      .send({ message: 'Successful logged out' });
-  } catch (err) {
-    next(err);
-  }
 };

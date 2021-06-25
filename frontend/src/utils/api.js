@@ -1,7 +1,10 @@
 class Api {
   constructor(config) {
+    this._headers = {
+      authorization: config.authorization,
+      'Content-Type': 'application/json'
+    };
     this._url = config.url;
-    this._headers = config.headers;
     this._cardsUrl = config.cardsUrl;
     this._cardsLikesUrl = config.cardsLikesUrl;
     this._userAvatarUrl = config.userAvatarUrl;
@@ -13,7 +16,7 @@ class Api {
   getUserInfo() {
     return fetch(`${this._url}${this._userInfoUrl}`, {
       method: 'GET',
-      headers: this._headers,
+      headers: this._headers
     })
     .then(this._checkServerResponse)
   }
@@ -22,7 +25,7 @@ class Api {
   getCards() {
     return fetch(`${this._url}${this._cardsUrl}`, {
       method: 'GET',
-      headers: this._headers,
+      headers: this._headers
     })
     .then(this._checkServerResponse)
   }
@@ -74,7 +77,7 @@ class Api {
   removeCard(cardData) {
     return fetch(`${this._url}${this._cardsUrl}/${cardData._id}`, {
       method: 'DELETE',
-      headers: this._headers,
+      headers: this._headers
     })
     .then(this._checkServerResponse)
   }
@@ -83,7 +86,7 @@ class Api {
   changeLikeCardStatus(cardId, isLiked) {
     return fetch(`${this._url}${this._cardsLikesUrl}${cardId}`, {
         method: isLiked ? 'PUT' : 'DELETE',
-        headers: this._headers,
+        headers: this._headers
       })
       .then(this._checkServerResponse)
   }
@@ -98,11 +101,8 @@ class Api {
 }
 
 const api = new Api({
-  url: 'https://api.mesto.me3enov.nomoredomains.club',
-  headers: {
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
-  },
+  authorization: '08402336-c176-4b17-bc07-4e156c9de6bc',
+  url: 'https://mesto.nomoreparties.co/v1/cohort-21',
   cardsUrl: '/cards',
   cardsLikesUrl: '/cards/likes/',
   userAvatarUrl: '/users/me/avatar',

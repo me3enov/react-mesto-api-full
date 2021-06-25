@@ -1,4 +1,4 @@
-const authUrl = 'https://api.mesto.me3enov.nomoredomains.club';
+const authUrl = 'https://auth.nomoreparties.co';
 
 export const registration = (email, password) => {
   return fetch(`${authUrl}/signup`, {
