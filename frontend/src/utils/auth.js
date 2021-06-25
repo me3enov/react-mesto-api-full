@@ -4,6 +4,7 @@ export const registration = (email, password) => {
   return fetch(`${authUrl}/signup`, {
     method: 'POST',
     headers: {
+      Accept: "application/json",
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ email, password }),
@@ -15,6 +16,7 @@ export const login = (email, password) => {
   return fetch(`${authUrl}/signin`, {
     method: 'POST',
     headers: {
+      Accept: "application/json",
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ email, password }),
@@ -26,8 +28,9 @@ export const getMe = (token) => {
   return fetch(`${authUrl}/users/me`, {
     method: 'GET',
     headers: {
-      'Content-Type': 'application/json',
+      Accept: "application/json",
       Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
     },
   })
     .then(res => checkServerResponse(res))

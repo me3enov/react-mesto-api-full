@@ -99,8 +99,8 @@ class Api {
 
 const api = new Api({
   headers: {
-    "Content-Type": "application/json",
     Authorization: `Bearer ${localStorage.getItem("token")}`,
+    "Content-Type": "application/json",
   },
   url: 'https://api.mesto.me3enov.nomoredomains.club',
   cardsUrl: '/cards',
