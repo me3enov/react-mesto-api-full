@@ -23,6 +23,8 @@ const limiter = rateLimit({
   message: 'Limiting to 100 requests per windowMs',
 });
 
+app.use(cors(corsOption));
+
 app.use(limiter);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -34,8 +36,6 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
   useFindAndModify: false,
   useUnifiedTopology: true,
 });
-
-app.use(cors(corsOption));
 
 app.get('/crash-test', () => {
   setTimeout(() => {
