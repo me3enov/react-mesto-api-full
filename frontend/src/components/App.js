@@ -57,31 +57,6 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    if(loggedIn) {
-      api.getUserInfo()
-        .then(res => {
-          setCurrentUser(res)
-        })
-        .catch(err => console.log(err));
-    }
-  }, [loggedIn]);
-
-  useEffect(() => {
-    if(loggedIn) {
-      api.getCards()
-        .then(res => {
-          setCards(res);
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [loggedIn]);
-
-  useEffect(() => {
-    checkToken();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   function handleAddPlace(card) {
     setLoading(true);
     api.addNewCard(card)
@@ -170,6 +145,31 @@ function App() {
     setIsInfoTooltipOpen(false);
     setSelectedCard(null)
   }
+
+  useEffect(() => {
+    if(loggedIn) {
+      api.getUserInfo()
+        .then(res => {
+          setCurrentUser(res)
+        })
+        .catch(err => console.log(err));
+    }
+  }, [loggedIn]);
+
+  useEffect(() => {
+    if(loggedIn) {
+      api.getCards()
+        .then(res => {
+          setCards(res);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [loggedIn]);
+
+  useEffect(() => {
+    checkToken();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     function handleEscClose(evt) {
