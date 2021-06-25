@@ -4,7 +4,7 @@
   "description": "express-mesto",
   "main": "app.js",
   "scripts": {
-    "lint": "npx eslint *.js routes/*.js controllers/*.js models/*.js errors/*.js middlewares/*.js",
+    "lint": "npx eslint .",
     "start": "node app.js",
     "dev": "nodemon app.js"
   },
