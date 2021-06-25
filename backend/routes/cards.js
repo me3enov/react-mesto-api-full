@@ -9,14 +9,14 @@ const {
   dislikeCard,
 } = require('../controllers/cards');
 
-card.get('/cards', getCards);
+card.get('/cards', auth, getCards);
 
-card.post('/cards', validateCard, createCard);
+card.post('/cards', validateCard, auth, createCard);
 
-card.delete('/cards/:_id', validateId, deleteCard);
+card.delete('/cards/:_id', validateId, auth, deleteCard);
 
-card.put('/cards/:_id/likes', validateId, likeCard);
+card.put('/cards/:_id/likes', validateId, auth, likeCard);
 
-card.delete('/cards/:_id/likes', validateId, dislikeCard);
+card.delete('/cards/:_id/likes', validateId, auth, dislikeCard);
 
 module.exports = card;
