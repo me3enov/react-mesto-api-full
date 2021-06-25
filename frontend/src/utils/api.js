@@ -100,7 +100,8 @@ class Api {
 const api = new Api({
   url: 'https://api.mesto.me3enov.nomoredomains.club',
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
   },
   cardsUrl: '/cards',
   cardsLikesUrl: '/cards/likes/',
