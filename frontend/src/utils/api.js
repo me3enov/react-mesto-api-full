@@ -110,7 +110,7 @@ const api = new Api({
   headers: {
     'Content-Type': 'application/json'
   },
-  url: 'api.mesto.me3enov.nomoredomains.club',
+  url: 'https://api.mesto.me3enov.nomoredomains.club',
   cardsUrl: '/cards',
   cardsLikesUrl: '/likes',
   userAvatarUrl: '/users/me/avatar',

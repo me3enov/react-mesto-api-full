@@ -1,6 +1,6 @@
 # react-mesto-api-full
 Публичный IPv4:
-178.154.204.64
+130.193.48.121
 
 Доменное имя:
 https://mesto.me3enov.nomoredomains.club
