@@ -10,7 +10,7 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 module.exports.getUsers = (req, res, next) => {
   User.find({})
     .then((users) => {
-      res.status(200).send(users);
+      res.status(200).send({ users });
     })
     .catch(next);
 };
@@ -20,7 +20,7 @@ module.exports.getCurrentUser = (req, res, next) => {
 
   User.findById(id)
     .orFail(new NotFoundError({ message: 'User not found!' }))
-    .then((user) => res.status(200).send({ user }))
+    .then((user) => res.status(200).send(user))
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new BadRequestError({ message: 'Wrong ID!' }));
@@ -34,7 +34,8 @@ module.exports.aboutUser = (req, res, next) => {
   const id = req.user._id;
 
   User.findById(id)
-    .then((user) => res.status(200).send({ user }))
+    .orFail(new NotFoundError({ message: 'User not found!' }))
+    .then((user) => res.send(user))
     .catch(next);
 };
 
@@ -88,7 +89,7 @@ module.exports.updateUser = (req, res, next) => {
     },
   )
     .then((user) => {
-      res.status(200).send({ data: user });
+      res.status(200).send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -112,7 +113,7 @@ module.exports.updateAvatar = (req, res, next) => {
     },
   )
     .then((user) => {
-      res.status(200).send({ data: user });
+      res.status(200).send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -133,7 +134,7 @@ module.exports.login = (req, res, next) => {
         NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key',
         { expiresIn: '7d' },
       );
-      res.status(200).send({ message: 'Successful authorization!' } });
+      res.send({ token });
     })
     .catch(next);
 };

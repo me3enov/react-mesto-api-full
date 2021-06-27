@@ -18,7 +18,7 @@ module.exports.createCard = (req, res, next) => {
     .then((card) => {
       res
         .status(200)
-        .send({ data: card });
+        .send(card);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -72,7 +72,7 @@ module.exports.likeCard = (req, res, next) => {
   )
     .orFail(new NotFoundError({ message: 'Card not found!' }))
     .then((card) => {
-      res.status(200).send({ data: card });
+      res.status(200).send(card);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -94,7 +94,7 @@ module.exports.dislikeCard = (req, res, next) => {
   )
     .orFail(new NotFoundError({ message: 'Card not found!' }))
     .then((card) => {
-      res.status(200).send({ data: card });
+      res.status(200).send(card);
     })
     .catch((err) => {
       if (err.name === 'CastError') {

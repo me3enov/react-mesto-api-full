@@ -1,4 +1,4 @@
-const authUrl = 'https://api.mesto.me3enov.nomoredomains.club';
+const authUrl = 'api.mesto.me3enov.nomoredomains.club';
 
 export const registration = (email, password) => {
   return fetch(`${authUrl}/signup`, {
@@ -29,8 +29,8 @@ export const getMe = (token) => {
     method: 'GET',
     headers: {
       Accept: "application/json",
-      Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
     },
   })
     .then(res => checkServerResponse(res))

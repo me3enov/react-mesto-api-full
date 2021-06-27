@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { login } from '../utils/auth.js';
 
-function SignIn({ handleSignIn, onLoading, isLoading }) {
+function SignIn({ handleSignIn, onLoading, checkToken, isLoading }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -15,6 +15,7 @@ function SignIn({ handleSignIn, onLoading, isLoading }) {
       .then((res) => {
         handleSignIn();
         localStorage.setItem('jwt', res.token);
+        checkToken();
         history.push('/');
       })
       .catch((err) => {

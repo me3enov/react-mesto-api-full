@@ -16,12 +16,12 @@ const {
 
 users.get('/users', getUsers);
 
-users.get('/users/:_id', validateId, getCurrentUser);
-
-users.get('/users/me', aboutUser);
+users.get('/users/me', validateId, aboutUser);
 
 users.patch('/users/me', validateUserUpdate, updateUser);
 
 users.patch('/users/me/avatar', validateAvatar, updateAvatar);
+
+users.get('/users/:_id', validateId, getCurrentUser);
 
 module.exports = users;

@@ -28,7 +28,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [userEmail, setUserEmail] = useState('');
   const [isLoading, setLoading] = useState(false);
 
@@ -42,21 +42,6 @@ function App() {
     setLoggedIn(false);
   }
 
-  const checkToken = () => {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      getMe(jwt)
-        .then((res) => {
-          setLoggedIn(true);
-          setUserEmail(res.data.email);
-          history.push('/');
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  };
-
   function handleAddPlace(card) {
     setLoading(true);
     api.addNewCard(card)
@@ -69,10 +54,10 @@ function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
     api.changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
       })
       .catch(err => console.log(err))
   }
@@ -147,32 +132,6 @@ function App() {
   }
 
   useEffect(() => {
-    console.log(loggedIn)
-    if(loggedIn) {
-      api.getUserInfo()
-        .then(res => {
-          setCurrentUser(res)
-        })
-        .catch(err => console.log(err));
-    }
-  }, [loggedIn]);
-
-  useEffect(() => {
-    if(loggedIn) {
-      api.getCards()
-        .then(res => {
-          setCards(res);
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [loggedIn]);
-
-  useEffect(() => {
-    checkToken();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
     function handleEscClose(evt) {
       if (evt.key === 'Escape') {
         closeAllPopups();
@@ -183,6 +142,34 @@ function App() {
       document.removeEventListener('keydown', handleEscClose);
     };
   }, [])
+
+  useEffect(() => {
+    checkToken();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const checkToken = () => {
+    const jwt = localStorage.getItem('jwt');
+    getMe(jwt)
+      .then((res) => {
+        setLoggedIn(true);
+        setUserEmail(res.email);
+        setCurrentUser(res)
+        history.push("/");
+      })
+      .catch((err) => {
+        setLoggedIn(false);
+        console.log(err);
+      });
+
+    api.getCards()
+      .then((cards) => {
+        setCards(cards);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -213,6 +200,7 @@ function App() {
               <Route path='/signin'>
                 <SignIn handleSignIn = {handleSignIn}
                 onLoading={setLoading}
+                checkToken={checkToken}
                 isLoading={isLoading} />
               </Route>
               <Route>

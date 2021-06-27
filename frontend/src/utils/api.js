@@ -9,11 +9,20 @@ class Api {
     this._errorText = config.errorText;
   }
 
+  //get header
+  getHeader() {
+    const token = localStorage.getItem('jwt');
+    return {
+        ...this._headers,
+        Authorization: `Bearer ${token}`,
+    }
+  }
+
   //get user info
   getUserInfo() {
     return fetch(`${this._url}${this._userInfoUrl}`, {
       method: 'GET',
-      headers: this._headers
+      headers: this.getHeader(),
     })
     .then(this._checkServerResponse)
   }
@@ -22,7 +31,7 @@ class Api {
   getCards() {
     return fetch(`${this._url}${this._cardsUrl}`, {
       method: 'GET',
-      headers: this._headers
+      headers: this.getHeader(),
     })
     .then(this._checkServerResponse)
   }
@@ -36,7 +45,7 @@ class Api {
   setUserInfo(userData) {
     return fetch(`${this._url}${this._userInfoUrl}`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: this.getHeader(),
       body: JSON.stringify({
         name: userData.name,
         about: userData.about
@@ -49,7 +58,7 @@ class Api {
   setUserAvatar(link) {
     return fetch(`${this._url}${this._userAvatarUrl}`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: this.getHeader(),
       body: JSON.stringify({
         avatar: link
       })
@@ -61,7 +70,7 @@ class Api {
   addNewCard(cardData) {
     return fetch(`${this._url}${this._cardsUrl}`, {
       method: 'POST',
-      headers: this._headers,
+      headers: this.getHeader(),
       body: JSON.stringify({
         name: cardData.name,
         link: cardData.link
@@ -74,16 +83,16 @@ class Api {
   removeCard(cardData) {
     return fetch(`${this._url}${this._cardsUrl}/${cardData._id}`, {
       method: 'DELETE',
-      headers: this._headers
+      headers: this.getHeader(),
     })
     .then(this._checkServerResponse)
   }
 
   //change like card status
   changeLikeCardStatus(cardId, isLiked) {
-    return fetch(`${this._url}${this._cardsLikesUrl}${cardId}`, {
+    return fetch(`${this._url}${this._cardsUrl}/${cardId}${this._cardsLikesUrl}`, {
         method: isLiked ? 'PUT' : 'DELETE',
-        headers: this._headers
+        headers: this.getHeader(),
       })
       .then(this._checkServerResponse)
   }
@@ -99,12 +108,11 @@ class Api {
 
 const api = new Api({
   headers: {
-    Authorization: `Bearer ${localStorage.getItem("token")}`,
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json'
   },
-  url: 'https://api.mesto.me3enov.nomoredomains.club',
+  url: 'api.mesto.me3enov.nomoredomains.club',
   cardsUrl: '/cards',
-  cardsLikesUrl: '/cards/likes/',
+  cardsLikesUrl: '/likes',
   userAvatarUrl: '/users/me/avatar',
   userInfoUrl: '/users/me',
   errorText: 'Ошибка:'
