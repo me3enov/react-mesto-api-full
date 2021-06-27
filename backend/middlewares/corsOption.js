@@ -1,6 +1,5 @@
 const CORS_WHITELIST = [
   'http://localhost:3000',
-  'http://localhost:3001',
   'https://mesto.me3enov.nomoredomains.club',
   'http://mesto.me3enov.nomoredomains.club',
 ];
